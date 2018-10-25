@@ -17,6 +17,8 @@
     elpy
     flycheck ;; add the flycheck package
     material-theme
+    yasnippet
+    yasnippet-snippets
     py-autopep8))
 
 (mapc #'(lambda (package)
@@ -32,6 +34,7 @@
 (global-linum-mode t) ;; enable line numbers globally
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
+(yas-global-mode 1) ;; 
 
 ;; Python configure
 (elpy-enable)
@@ -39,10 +42,13 @@
 ;; To activate specific environment, use M-x pyvenv-workon
 (setenv "WORKON_HOME" "/Users/timothy/package_install/miniconda3/envs")
 (pyvenv-mode 1)
+
+;; better grammar check
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+;; autopep8
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
